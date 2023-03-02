@@ -1,0 +1,165 @@
+/* /pages/login.js */
+
+import React, { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
+import {StyledContainer, StyledLabel, StyledInput} from "../components/Register/Register.styles"
+import {StyledButton1, StyledModal, StyledModalBody, StyledModalHeader, CancelButton} from "../lib/GlobalStyles"
+import { login } from "../components/auth";
+import AppContext from "../components/context";
+
+function Login(props) {
+  const [data, updateData] = useState({ identifier: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const router = useRouter();
+  const appContext = useContext(AppContext);
+
+  const [modaltitle, setModaltitle] = React.useState('');
+  const [modaltext, setModaltext] = React.useState('');
+  const [curModal, setModal] = React.useState(false);
+  
+  const errorClose = () => setModal(!curModal);
+
+
+  useEffect(() => {
+    if (appContext.isAuthenticated) {
+      router.push("/"); // redirect if you're already logged in
+    }
+  }, []);
+
+  function onChange(event) {
+    updateData({ ...data, [event.target.name]: event.target.value });
+  }
+
+  function ErrorModal(props) {
+    
+    return(
+      <StyledModal style={{marginTop: "220px"}}
+      isOpen={curModal} 
+      toggle={errorClose}
+    >
+      <StyledModalHeader>
+        {props.errortitle}
+        <CancelButton onClick={errorClose}>X</CancelButton>
+      </StyledModalHeader>
+      <StyledModalBody>{props.errortext}</StyledModalBody>
+    </StyledModal>
+)}
+
+function validate(field, label){
+  let errorText = "";
+  setModaltitle('Invalid Input Value');
+
+  if (!field || field.length<1) {   
+    errorText = "Enter a correct value in the " + label + " field "
+    setModaltext(errorText);
+    setModal(true);
+    return false;
+  }
+  else {
+    if (label === 'password' && field.length < 8) {
+        errorText = "Your password must be at least 8 characters. ";
+        setModaltext(errorText);
+        setModal(true);
+        return false;
+      }       
+    }
+
+  return true;
+}
+
+  function HandleCreate(){
+    if (!validate(data.identifier, 'email')) return;
+    if (!validate(data.password, 'password')) return;
+
+    setLoading(true);
+    login(data.identifier, data.password)
+      .then((res) => {
+        setLoading(false);
+        appContext.setUser(res.data.user, true);
+      })
+      .catch((error) => {
+        //setError(error.response.data);
+        setLoading(false);
+      });
+  }
+  
+  return (
+    <>
+    <StyledContainer>
+      <Row>
+        <Col sm="12">
+          <div className="paper">
+            <div className="header">
+              <img src="http://164.92.99.205:1337/uploads/48f9b5304bed46bf9210e82021dc68a1.png" />
+              <h2>FINE EATS LOGIN</h2>
+            </div>
+            <section className="wrapper">
+              {Object.entries(error).length !== 0 &&
+                error.constructor === Object &&
+                error.message.map((error) => {
+                  return (
+                    <div
+                      key={error.messages[0].id}
+                      style={{ marginBottom: 10 }}
+                    >
+                      <small style={{ color: "red" }}>
+                        {error.messages[0].message}
+                      </small>
+                    </div>
+                  );
+                })}
+              <Form>
+                <fieldset disabled={loading}>
+                  <FormGroup>
+                    <StyledLabel>Email:</StyledLabel>
+                    <StyledInput
+                      onChange={(event) => onChange(event)}
+                      name="identifier"
+                    />
+                  </FormGroup>
+                  <FormGroup style={{ marginBottom: 30 }}>
+                    <StyledLabel>Password:</StyledLabel>
+                    <StyledInput
+                      onChange={(event) => onChange(event)}
+                      type="password"
+                      name="password"
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <span>
+                      <a href="">
+                        <small style={{fontSize: ".9em"}}>Forgot Password?</small>
+                      </a>
+                    </span>
+                    <StyledButton1
+                      style={{ float: "right", width: 120 }}
+                      onClick={HandleCreate}
+                    >
+                      {loading ? "Loading... " : "Submit"}
+                    </StyledButton1>
+                  </FormGroup>
+                </fieldset>
+              </Form>
+            </section>
+          </div>
+        </Col>
+      </Row>
+    </StyledContainer>
+    <ErrorModal errortitle={modaltitle} errortext={modaltext}/>
+  </>
+  );
+}
+
+export default Login;

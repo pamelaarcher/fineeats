@@ -1,0 +1,179 @@
+/* /pages/register.js */
+
+import React, { useState, useContext } from "react";
+import {StyledContainer, StyledLabel, StyledInput} from "../components/Register/Register.styles"
+import {StyledButton1, StyledModal, StyledModalBody, StyledModalHeader, CancelButton} from "../lib/GlobalStyles"
+
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
+import { registerUser } from "../components/auth";
+import AppContext from "../components/context";
+
+const Register = () => {
+  const [data, setData] = useState({ email: "", username: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({});
+  const appContext = useContext(AppContext);
+  const [modaltitle, setModaltitle] = React.useState('');
+  const [modaltext, setModaltext] = React.useState('');
+  const [curModal, setModal] = React.useState(false);
+  const modalClose = () => setModal(!curModal);
+
+  function SetModal(props) {
+    
+    return(
+      <StyledModal style={{marginTop: "220px"}}
+      isOpen={curModal} 
+      toggle={modalClose}
+    >
+      <StyledModalHeader>
+        {props.modaltitle}
+        <CancelButton onClick={modalClose}>X</CancelButton>
+      </StyledModalHeader>
+      <StyledModalBody>{props.modaltext}</StyledModalBody>
+    </StyledModal>
+)}
+
+  function validate(field, label){
+    let modalText = "";
+    setModaltitle('Invalid Input Value');
+
+    if (!field || field.length<1) {   
+      modalText = "Enter a correct value in the " + label + " field "
+      setModaltext(modalText);
+      setModal(true);
+      return false;
+    }
+    else {
+      if (label === 'password' && field.length < 8) {
+          modalText = "Your password must be at least 8 characters. ";
+          setModaltext(modalText);
+          setModal(true);
+          return false;
+        }       
+      }
+
+    return true;
+  }
+
+  function HandleRegister(){
+    if (!validate(data.username, 'username')) return;
+    if (!validate(data.email, 'email')) return;
+    if (!validate(data.password, 'password')) return;
+
+    setLoading(true);
+    registerUser(data.username, data.email, data.password)
+      .then((res) => {
+        // set authed user in global context object
+        appContext.setUser(res.data.user);
+      setLoading(false);
+      console.log(`registered user: ${JSON.stringify(res.data)}`)
+      return false;
+      })
+      .catch((error) => {
+        console.log(`error in register: ${error}`)
+        //setError(error.response.data);
+        setModaltitle('Registration Failed');
+        setModaltext('The account already exists or connection failed');
+        setModal(true);
+        setLoading(false);
+      });
+  }
+
+  return (
+    <>
+    <StyledContainer>
+      <Row>
+        <Col sm="12">
+          <div className="paper">
+            <div className="header">
+              <img src="http://164.92.99.205:1337/uploads/f79de00961114a89857437f9d3a00af9.png" />
+              <h2>FINE EATS Sign Up</h2>
+            </div>
+            <section className="wrapper">
+              {Object.entries(error).length !== 0 &&
+                error.constructor === Object &&
+                error.message.map((error) => {
+                  return (
+                    <div
+                      key={error.messages[0].id}
+                      style={{ marginBottom: 10 }}
+                    >
+                      <small style={{ color: "red" }}>
+                        {error.messages[0].message}
+                      </small>
+                    </div>
+                  );
+                })}
+              <Form>
+                <fieldset disabled={loading}>
+                  <FormGroup>
+                    <StyledLabel>Username:</StyledLabel>
+                    <StyledInput
+                      disabled={loading}
+                      onChange={(e) =>
+                        setData({ ...data, username: e.target.value })
+                      }
+                      value={data.username}
+                      type="text"
+                      name="username"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <StyledLabel>Email:</StyledLabel>
+                    <StyledInput
+                      onChange={(e) =>
+                        setData({ ...data, email: e.target.value })
+                      }
+                      value={data.email}
+                      type="email"
+                      name="email"
+                    />
+                  </FormGroup>
+                  <FormGroup style={{ marginBottom: 30 }}>
+                    <StyledLabel>Password:</StyledLabel>
+                    <StyledInput
+                      onChange={(e) =>
+                        setData({ ...data, password: e.target.value })
+                      }
+                      value={data.password}
+                      type="password"
+                      name="password"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <span>
+                      <a href="">
+                        <small>Forgot Password?</small>
+                      </a>
+                    </span>
+                    <StyledButton1
+                      style={{ float: "right", marginTop: 10, width: 120 }}
+                      color="primary"
+                      disabled={loading}
+                      onClick={HandleRegister}
+                    >
+                      {loading ? "Loading.." : "Submit"}
+                    </StyledButton1>
+                  </FormGroup>
+                </fieldset>
+              </Form>
+            </section>
+          </div>
+        </Col>
+      </Row>
+
+    </StyledContainer>
+    <SetModal modaltitle={modaltitle} modaltext={modaltext}/>
+  </>
+  );
+};
+export default Register;
