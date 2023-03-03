@@ -26,7 +26,7 @@ function OrderCard({ address, city, state, amount, dishes}) {
   console.log(dishes)
 
   const dishesList = dishes.map((res) => (
-    <Col xs="12" key={res.id}>
+    <Col xs="12" >
       <span>{res.name}</span>
       <span style={{float: "right"}}>${res.price}</span>
       <span>({res.quantity})</span>

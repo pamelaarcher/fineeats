@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next dev"
   },
   "dependencies": {
     "@apollo/client": "^3.2.4",

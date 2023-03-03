@@ -138,7 +138,7 @@ export const StyledCard = styled(Card)`
   position: relative;
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
   width: 350px;
-  height: 100%;
+  height: 92%;
   background-color: var(--bs-secondary);
   margin-left: auto;
   margin-right: auto;
