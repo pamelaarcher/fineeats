@@ -47,7 +47,7 @@ export function Footer() {
             <ListGroup.Item>
               <FooterLink id="login" href="/login">Sign In</FooterLink>
             </ListGroup.Item> 
-            {(context.windowWidth >= 992) ? (
+            {/* {(context.windowWidth >= 992) ? (
               <>
                 <h5></h5>
                 <h5></h5>
@@ -55,7 +55,7 @@ export function Footer() {
                 <h5></h5>
                 <h5></h5>
               </>
-            ):null}
+            ):null} */}
           </StyledList>   
         </SiteMap>
       </Col>

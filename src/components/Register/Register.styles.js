@@ -67,6 +67,16 @@ export const StyledContainer=styled(Container)`
     color: var(--navigation-active-color);
   }
 
+  h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    color: var(--bs-gray-800);
+  }
+
   label {
     color: var(--bs-primary);
     font-weight: 600;
@@ -112,6 +122,9 @@ a {
       padding-top: 2.2vw;
       font-size: 4vw;
     }
+    h6 {
+      font-size: 3.6vw;
+    }
     small {
       color: var(--bs-gray-800);
       font-size: .6em;
@@ -133,6 +146,10 @@ a {
       font-size: 1.2em;
     }
 
+    h6 {
+      font-size: 1.6vw;
+    }
+
     font-size: 1.3vw;
     small {
       font-size: .8em;
@@ -145,6 +162,10 @@ a {
       font-size: 1em;
     }
   }
+
+  h6 {
+      font-size: 1.3vw;
+    }
 `;
 
 export const StyledLabel=styled(Label)`

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-// import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
 import CheckoutForm from "../checkoutForm";
 import AppContext from "../context";
 

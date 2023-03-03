@@ -49,9 +49,9 @@ const GET_RESTAURANT_DISHES = gql`
     variables: { id: restId},
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>ERROR here</p>;
-  if (!data) return <p>Not found</p>;
+  if (loading) return <p style={{marginTop: 60}}>Loading...</p>;
+  if (error) return <p style={{marginTop: 60}}>ERROR here</p>;
+  if (!data) return <p style={{marginTop: 60}}>Not found</p>;
 
   let restaurant = data.restaurant;
 
@@ -65,10 +65,10 @@ const GET_RESTAURANT_DISHES = gql`
 
   if (searchQuery.length > 0){
     const restMenu = searchQuery.map((res) => (
-      <Col xs="12" sm="6" md="4" lg="3" key={res.id}>
+      <Col xs="12" sm="6" md="4" lg="4" key={res.id}>
         <RestaurantCard 
           type="Menu"
-          image={`http://164.92.99.205:1337` + res.image.url}
+          image={res.image.url ? `http://164.92.99.205:1337` + res.image.url : ".\images.salad.webp"}
           restid={res.id}
           title={res.name}
           text={res.description}
@@ -90,7 +90,10 @@ const GET_RESTAURANT_DISHES = gql`
         )}
         else{
           return (
-            <h3 style={{marginLeft: 20, marginTop: 20}}> No Dishes for this restaurant</h3>
+            <StyledMenu>
+            <h1>No Dishes for this restaurant</h1>
+            <h1></h1>
+          </StyledMenu>
           )
         }
     }

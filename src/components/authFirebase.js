@@ -22,12 +22,6 @@ export const loginFirebaseGoogle = (firebaseConfig) => {
         // The signed-in user info.
         var user = result.user;
         Cookie.set("token", token);
-        console.log(result);
-        console.log("google credential: ", credential)
-        console.log("token ", token)
-        console.log("google user: ", user);
-        console.log("google email: ", user.email);
-        console.log("google displayName: ", user.displayName);
         resolve(result);
       })
       .catch((error) => {
@@ -44,7 +38,6 @@ export const registerFirebase = (email, password, firebaseConfig) => {
     if (typeof window === "undefined") {
       return;
     }
-    console.log(firebaseConfig)
     
     return new Promise((message) => {
 
@@ -62,14 +55,10 @@ export const registerFirebase = (email, password, firebaseConfig) => {
 
       promise.then((res) => {
         const user = res.user
-        console.log("then from firebase")
-        console.log(res);
         message(user);
       })
 
       promise.catch((error) => {
-        console.log("catch from firebase")
-        console.log(error);
         message(error);
         });
     });
@@ -97,7 +86,6 @@ export const loginFirebase = (email, password, firebaseConfig) => {
 
       promise.then((res) => {
         const user = res.user
-        console.log(res);
         message(user);
       })
 

@@ -91,7 +91,6 @@ const Register = () => {
         // set authed user in global context object
       setLoading(false);
       setUser(res.data.user, true);
-      console.log(`registered user: ${JSON.stringify(res.data)}`)
       return false;
       })
       .catch((error) => {
@@ -111,14 +110,11 @@ const Register = () => {
     loginFirebaseGoogle(firebaseConfig)
     .then((res) => {
         setLoadGoogle(false);
-        console.log("google info")
-        console.log(res)
         newuser.email = res.user.email
         newuser.username = res.user.displayName
         registerUser(newuser.username, newuser.email, "Google123")
         .then((res) => {
           // set authed user in global context object
-          console.log(`registered user: ${JSON.stringify(res.data)}`)
           setSuccess(true);
           setUser(res.data.user, true);
           setModaltitle('Successful Registration');
@@ -137,7 +133,6 @@ const Register = () => {
 
       })
       .catch((error) => {
-        console.log("google error")
         console.log(error)
         setLoadGoogle(false);
       });
@@ -151,8 +146,6 @@ const Register = () => {
     setLoadEmail(true);
     registerFirebase(data.email, data.password, firebaseConfig)
       .then((res) => {
-        console.log("registerFirebase Call")
-        console.log(res)
         if (res.code === "auth/email-already-in-use") {
           setModaltitle('Registration Failed');
           setModaltext('Your entered email has already been used');
@@ -163,7 +156,6 @@ const Register = () => {
         registerUser(data.username, data.email, data.password)
           .then((res) => {
             // set authed user in global context object
-            console.log(`registered user: ${JSON.stringify(res.data)}`)
             setSuccess(true);
             setUser(res.data.user, true);
             setModaltitle('Successful Registration');
@@ -211,6 +203,7 @@ const Register = () => {
               <Form>
                 <fieldset>
                   <h4>Signup with Email</h4>
+                  <h6>DO NOT USE YOUR GOOGLE EMAIL TO REGISTER BY EMAIL</h6>
                   <FormGroup>
                     <StyledLabel>Username:</StyledLabel>
                     <StyledInput
@@ -253,7 +246,7 @@ const Register = () => {
                     <StyledButton1
                       style={{float: "left", width: 95 }}
                       onClick={HandleFirebase}
-                      disabled={loademail}
+                      disabled={data.username.length<1 || data.password.length<1 || data.password.length<1 || loademail}
                     >
                       {loademail ? "Loading... " : "With Email"}
                     </StyledButton1>

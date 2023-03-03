@@ -23,7 +23,6 @@ import {
 
 function RestaurantList(props) {
 
-  console.log(props)
   const [restaurantID, setRestaurantID] = useState(0)
   // const { cart } = useContext(AppContext);
   // const [state, setState] = useState(cart)
@@ -40,19 +39,14 @@ function RestaurantList(props) {
     }
   `;
   const { loading, error, data } = useQuery(GET_RESTAURANTS)
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>ERROR</p>;
-  if (!data) return <p>Not found</p>;
-  console.log('Query Data:')
-  console.log(data.restaurants)
-  console.log(props.search)
+  if (loading) return <p style={{marginTop: 60}}>Loading...</p>;
+  if (error) return <p style={{marginTop: 60}}>ERROR</p>;
+  if (!data) return <p style={{marginTop: 60}}>Not found</p>;
 
 
   let searchQuery = data.restaurants.filter((res) => {
     return res.name.toLowerCase().includes(props.search)
   }) || [];
-
-  console.log(searchQuery)
 
   let restId = searchQuery[0] ? searchQuery[0].id : null;
 
@@ -86,7 +80,12 @@ function RestaurantList(props) {
 
     )
   } else {
-    return <h1> No Restaurants Found</h1>
+    return (
+      <StyledRestaurants>
+        <h1> No Restaurants Found</h1>
+        <h1></h1>
+      </StyledRestaurants>
+    )
   }
 }
 export default RestaurantList

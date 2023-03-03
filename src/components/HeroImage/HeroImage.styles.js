@@ -45,7 +45,7 @@ export const WaveEdge = styled.div`
     border: 0;
     bottom: -5px;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 9vw;
     /* height: 50px; */
     z-index: 10;
@@ -53,7 +53,7 @@ export const WaveEdge = styled.div`
 
 svg {
     display: block;
-    width: 100vw;
+    width: 100%;
     fill: #f6fcfc;
 }
 
@@ -93,13 +93,12 @@ export const SearchInput = styled.div`
   border-color:  #FFB600;
   margin: 0;
   padding: 0;
-  padding-left: .4vh;
-  padding-right: .4vh;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 .input-group-text {
   color: #68757b;
   font-weight: 700;
-  font-size: 1.6vw;
   text-align: center;
   background-color: #FFB600;
   border-radius: 10% 10% / 10% 10%;
@@ -136,15 +135,30 @@ h4 {
 }
 
 @media (min-width: 992px) {
-
+  .input-group-text {
+    font-size: 1.2vw;
+  }
+  .input-group-append {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+  .form-control {
+    font-weight: 600;
+    font-size: 1.2vw;
+}
 }
 @media (min-width: 768px) and (max-width: 992px) {
-
+  font-size: 1.2vw;
 }
 @media (max-width: 768px) { 
   .input-group-text {
-    font-size: 2.4vw;
+    font-size: 2.6vw;
   }
+  .form-control {
+    font-weight: 600;
+    font-size: 2.6vw;
+  }
+  
   h3 {
     font-size: 3.6vw;
   }

@@ -6,6 +6,7 @@ import {StyledHeader} from "../components/OrderHistory/OrderHistory.styles";
 import OrderHistory from '../components/OrderHistory/OrderHistory';
 import {Footer} from '../components/Footer/Footer'
 import AppContext from "../components/context";
+import { useRouter } from "next/router";
 import {Row, Col} from "reactstrap"
 
 function GetOrders() {
@@ -14,23 +15,28 @@ function GetOrders() {
     const link = new HttpLink({ uri: `${API_URL}/graphql`})
     const cache = new InMemoryCache()
     const client = new ApolloClient({link,cache});
-   
+    const router = useRouter();
+
     return (
         <ApolloProvider client={client}>
             <HeroImage
                 image = {"./images/healthyfoods.jpg"}
             />
-            <StyledHeader>
-              <h3> Order History for {user.username}</h3>
-            </StyledHeader>
-            <Row>
-                <Col sm="12">
-                <OrderHistory
-                    userid = {"39"}
-                    username = {"Pamela Archer"}
-                />
-                </Col>
-            </Row>
+            {user ? (
+                <>
+                    <StyledHeader>
+                        <h3> Order History for {user.username}</h3>
+                    </StyledHeader>
+                    <Row>
+                        <Col sm="12">
+                        <OrderHistory
+                            userid = {String(user.id)}
+                            username = {user.username}
+                        />
+                        </Col>
+                    </Row>
+                </>
+            ): null}
             <Footer/>
         </ApolloProvider>
     );

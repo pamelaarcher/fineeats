@@ -45,8 +45,6 @@ useEffect(() => {
   return () => window.removeEventListener("resize", resizeWindow);
 }, [deviceType, windowWidth, windowHeight]);
 
-console.log("Globalcontext")
-
 return (
   <GlobalContext.Provider value={{windowType, windowWidth, windowHeight, breakType, winSizes}}>
     {children}

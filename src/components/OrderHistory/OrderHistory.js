@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 // import Dishes from "../dishes"
 import { useContext, useState } from 'react';
+import { useRouter } from "next/router";
 import OrderCard from "../OrderCard/OrderCard"
 import AppContext from "../context"
 import {
@@ -21,9 +22,6 @@ import {
 
 
 function OrderHistory(props) {
-  
-
-  console.log(props)
 
   const GET_ORDERS = gql`
     query {
@@ -40,25 +38,20 @@ function OrderHistory(props) {
 `;
 
   const { loading, error, data } = useQuery(GET_ORDERS)
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>ERROR</p>;
-  if (!data) return <p>Not found</p>;
-  console.log('Query Data:')
-  console.log(data)
+  if (loading) return <p style={{marginTop: 60}}>Loading...</p>;
+  if (error) return <p style={{marginTop: 60}}>ERROR</p>;
+  if (!data) return <p style={{marginTop: 60}}>Not found</p>;
 
   let orders = data.orders;
-
-  console.log(orders)
 
   let searchQuery = orders.filter((res) => {
     return res.user === props.userid});
 
-  console.log(searchQuery)
-
   if (searchQuery.length > 0) {
     const orderList = searchQuery.map((res) => (
-      <Col xs="12" sm="6" md="6" lg="4" key={res.id}>
+      <Col xs="12" sm="6" md="6" lg="4">
         <OrderCard 
+          key={res.id}
           address={res.address}
           city={res.city}
           state={res.state}
@@ -79,7 +72,12 @@ function OrderHistory(props) {
 
     )
   } else {
-    return <h1> No Orders Found</h1>
+      return (
+        <StyledOrders>
+        <h1>No Orders Found</h1>
+        <h1></h1>
+      </StyledOrders>
+      )
   }
 }
 export default OrderHistory

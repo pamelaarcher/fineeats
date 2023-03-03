@@ -15,7 +15,16 @@ export const StyledMenu=styled(Container)`
   position: relative;
   margin-top: 30px;
 
-h2 {
+  h1 {
+  text-transform: uppercase;
+  font-size: 2vw;
+  color: var(--bs-accent-2);
+  padding-left: 0;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  }
+
+  h2 {
   color: var(--bs-primary);
   margin-top: 28px;
   margin-bottom: 10px;

@@ -8,6 +8,7 @@ import {HeroImage} from "../components/HeroImage/HeroImage"
 import {SearchInput} from "../components/HeroImage/HeroImage.styles";
 import RestaurantMenu from '../components/RestaurantMenu/RestaurantMenu';
 import AppContext from "../components/context";
+import {Footer} from "../components/Footer/Footer"
 import {Row, Col} from "reactstrap"
 
 function GetMenu() {
@@ -57,6 +58,7 @@ function GetMenu() {
                 {/* {user ? (<Cart> </Cart>):null} */}
                 </Col>
             </Row>
+            <Footer/>
         </ApolloProvider>
     );
   }

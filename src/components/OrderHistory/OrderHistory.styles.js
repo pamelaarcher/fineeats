@@ -51,8 +51,18 @@ h3 {
 export const StyledOrders=styled(Container)`
   position: relative;
   margin-top: 20px;
+  margin-bottom: 60px;
 
-h2 {
+  h1 {
+  text-transform: uppercase;
+  font-size: 2vw;
+  color: var(--bs-accent-2);
+  padding-left: 0;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  }
+
+  h2 {
   color: var(--bs-primary);
   margin-top: 28px;
   margin-bottom: 20px;

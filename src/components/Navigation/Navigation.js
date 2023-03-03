@@ -39,6 +39,7 @@ export function Navigation(){
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const {asPath} = useRouter();
+  const router = useRouter();
 
   const toggleCart = () => {
     if(showCart === false) {
@@ -57,16 +58,11 @@ export function Navigation(){
     }
 
   const removeUser = () => {
-    let user={email: null, username: null, id: 0};
-    setUser(user, false);
-    logout()
+   // let user={email: null, username: null, id: 0};
+    setUser(null, false);
     {handleClose}
+    router.push("/");
   }
-
-  console.log("Navigation")
-  console.log(user)
-  console.log(showCart)
-  console.log(cartvisible)
   
   return (
     <>
@@ -79,7 +75,7 @@ export function Navigation(){
         {isAuthenticated ? (
           <>
             <h5>{user.username}</h5>
-            <CartButton>
+            <CartButton suppressHydrationWarning={true} onClick={openCart}>
               <CartCenter>
                 <img src='./images/cart.svg' fill="white"></img>
                 {cart ? (
@@ -149,7 +145,7 @@ export function Navigation(){
             </Nav>
             {(context.windowWidth >= 768 && isAuthenticated) ? (
               <>
-              <CartButton onClick={openCart}>
+              <CartButton suppressHydrationWarning={true} onClick={openCart}>
                 <CartCenter>
                   <img src='./images/cart.svg' fill="white"></img>
                 </CartCenter>

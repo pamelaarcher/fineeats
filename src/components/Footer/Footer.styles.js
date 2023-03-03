@@ -4,6 +4,7 @@ import {Row, Col, ListGroup} from "react-bootstrap"
 export const Wrapper = styled.footer`
     position: relative;
     width: 100%;
+    overflow: hidden;
     height: auto;
     margin: 0p;
     padding: 0;
@@ -14,6 +15,7 @@ export const StyledRow = styled(Row)`
       /* position: relative; */
       width: 100% !important;
       height: auto;
+      overflow: hidden;
       margin: 0 !important;
       margin-right: 0;
       margin-left: 0;
@@ -24,11 +26,14 @@ export const StyledRow = styled(Row)`
 export const StyledCol = styled(Col)`
   padding: 0;
   margin: 0;
+  overflow: hidden;
 `;
 
 export const SignUpBox = styled.div`
 
 margin-top: 20px;
+height: 100%;
+overflow: hidden;
 
   @media (max-width: 576px) {
     width: 98%;
@@ -63,13 +68,15 @@ margin-top: 20px;
 
 export const SiteMap = styled.div`
   margin-top: 20px;
+  height: 100%;
+  overflow: hidden;
 
   h5 {
     font-size: 20px;
   }
 
   @media (max-width: 576px) {
-    width: 98%;
+    width: 100%;
     margin-left: 5px;
     margin-right: 5px;
     padding-bottom: 20px;
@@ -113,6 +120,7 @@ export const ContactUs = styled.div`
   padding-left: .25em;
   margin-top: 16px;
   margin-bottom: 10px;
+  overflow: hidden;
   /* border-right: 2px solid rgb(255,182,0, 85%) !important; */
 
   @media (max-width: 576px) {
@@ -167,6 +175,7 @@ text-size-adjust: 100%;
 color: #ffff;
 display: block;
 margin: 0;
+margin-top: 15px;
 padding: 0;
 `;
 

@@ -107,7 +107,9 @@ export const CardImageRightBlank = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-  position: relative;
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
   background: linear-gradient(0deg, rgba(79,110,118,1) 0%, rgba(96,145,158,1) 100%);
   border: none;
   width: 100px;
@@ -138,28 +140,11 @@ export const StyledButton = styled(Button)`
 export const StyledCard = styled(Card)`
   position: relative;
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
-  height: 380px;
+  height: 400px;
   background-color: var(--bs-secondary);
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 25px;
-  
-  /* .card-title {
-    font-family: Monserrat, sans-serif;
-    font-size: 1.5em;
-    font-weight: 700;
-    margin: 0px;
-    padding-left: 5px;
-    text-transform: uppercase;
-  } */
-
-  /* .card-text { 
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 0px;
-    /* margin-bottom: 1.5em;  */
-    line-height: 24px;
-  } */
 `;
 
 export const StyledBody = styled(CardBody)`

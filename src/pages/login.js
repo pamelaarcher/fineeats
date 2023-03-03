@@ -113,8 +113,6 @@ function validate(field, label){
     setLoadGoogle(true);
     loginFirebaseGoogle(firebaseConfig)
     .then((res) => {
-        console.log("Logged in google")
-        console.log(res.user)
         newuser.email = res.user.email
         newuser.username = res.user.displayName
         // newuser.id = res.user.uid
@@ -126,10 +124,8 @@ function validate(field, label){
           setUser(res.data.user, true);
         })
         .catch((error) => {
-          console.log(error);
           registerUser(newuser.username, newuser.email, "Google123")
           .then((res) => {
-            console.log(res.data.user)
             setUser(res.data.user, true);
           })
           .catch((error) => {
@@ -140,7 +136,6 @@ function validate(field, label){
         })
       })
       .catch((error) => {
-        console.log(error)
         setLoadGoogle(false);
       });
   }
@@ -198,7 +193,7 @@ function validate(field, label){
                     <StyledButton1
                       style={{float: "left", width: 95 }}
                       onClick={HandleCreate}
-                      disabled={loademail}
+                      disabled={data.identifier.length<1 || data.password.length<1 || loademail}
                     >
                       {loademail ? "Loading... " : "Email Login"}
                     </StyledButton1>

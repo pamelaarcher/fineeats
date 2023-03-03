@@ -10,19 +10,12 @@ import AppContext from "../components/context";
 
 function Home() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://164.92.99.205:1337";
-    console.log(`URL: ${API_URL}`)
     const [query, setQuery] = useState("");
     const link = new HttpLink({ uri: `${API_URL}/graphql`})
     const cache = new InMemoryCache()
     const client = new ApolloClient({link,cache});
     const {user} = useContext(AppContext);
 
-    console.log("In index.js");
-    if (user) {
-        console.log(user.username)
-    }
-
-  
     return (
         <ApolloProvider client={client}>
         <HeroImage
