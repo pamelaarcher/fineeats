@@ -33,7 +33,7 @@ The application is three tiered with React/Next used for the client,  a Node ser
 2. Run the command below to create a node app and install dependencies  
 &nbsp;&nbsp;&nbsp;   npm install  
 &nbsp;&nbsp;&nbsp;   npm run build
-3. Start up the server by issuing this command.  It will start the backend Strapi database server app on localhost:1337;  You can access the database admin console through localhost:1337/admin 
+3. Start up the server by issuing this command.  It will start the backend Strapi database server app on localhost:1337;  You can access the database admin console through <b>localhost:1337/admin</b>.   
 &nbsp;&nbsp;&nbsp;   npm run dev
 
 YOU SHOULD NOW BE UP AND RUNNING.  Run through the application functionality.  
