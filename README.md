@@ -19,8 +19,8 @@ The application is three tiered with React/Next used for the client,  a Node ser
 1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and express) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
 
 ### Setting up the fineeats create-next-app application
-1. Rename the new fineeats directory as we will be creating a new one with the same name with create-next-app.
-2. Within the fineeats directory, run the following commands to create the create-next-app application.  Along with <b>next</b> and <b>react</> it will also install react-dom, react-bootstrap/reactstrap/styled-components (for styling), axios (for API calls),  and graphql (used to access Strapi).  Change to the new directory and run npm to install additional libraries.   This will create a new react Next.js application.   
+1. Rename the new <b>fineeats</b> directory as we will be creating a new one with the same name with create-next-app.
+2. Within the <b>fineeats</b> directory, run the following commands to create the create-next-app application.  Along with <b>next</b> and <b>react</b> it will also install react-dom, react-bootstrap/reactstrap/styled-components (for styling), axios (for API calls),  and graphql (used to access Strapi).  Change to the new directory and run npm to install additional libraries.   This will create a new react Next.js application.   
 &nbsp;&nbsp;&nbsp;   npx create-next-app fineeats  
 &nbsp;&nbsp;&nbsp;   cd fineeats 
 3. Verify that all of the dependencies found in the package.json were installed
