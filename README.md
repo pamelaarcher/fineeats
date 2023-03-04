@@ -86,5 +86,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Learn More about Create React App
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Create Next App documentation](https://nextjs.org/docs/getting-started).
 
