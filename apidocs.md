@@ -16,8 +16,10 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="469" alt="image" src="https://user-images.githubusercontent.com/106486280/223210483-7ce187f3-1233-4746-a283-135b79a57e69.png">
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="636" alt="image" src="https://user-images.githubusercontent.com/106486280/223213434-a45bfdf3-1191-43a1-8e27-5ffc442718f7.png">
+
  
- - <b>http://164.92.99.205:1337/auth/local/register`, { username, email, password })
+ - <b>http://164.92.99.205:1337/auth/local/register`, { username, email, password }</b> - used to register a user in Strapi.
 ### Restaurants (GET Method)
  - <b>http://164.92.99.205:1337/restaurants</b> - brings back all restaurants and their associated dishes in JSON format
  - <b>http://164.92.99.205:1337/restaurants/count</b> - brings back restaurant count
