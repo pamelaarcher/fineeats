@@ -72,24 +72,14 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
 ## GraphQL APIs
 The application uses the GraphQL Apollo client library to access the backend Strapi database running on the DigitalOcean hosted site via a Node backend server.   The APIs include
 
-### Restaurants
- - <b>http://164.92.99.205:1337/restaurants/count</b> - this installs the React Next.jsframework along with react and react-dom and sets up a generic project.
- - <b>Apollo</b> - used for API calls
- - <b>graphql</b> - used for query sending and receiving (through Axios) to the Strapi database
- - <b>Bootstrap</b> - CSS styling library    
- - <b>Axios</b> - Allows http calls to the backend api server
- - <b>Google Firebase</b> Authentication cloud service
- - <b>Stripe</b> payment verification cloud server
-
 ## Google Firebase APIs
-1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and strapi database) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
+1. <b>Registering a User in Google Firebase</b>  - the following code takes in an email, password and your firebase configuration, initializes the Firebase application and calls the auth.createUserWithEmailAndPassword method to register the user in Google Firebase using standard email and password.  The JWT token is returned in the response along with user information including their role authentication.   A firebase configuration example is as follows.   
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="482" alt="image" src="https://user-images.githubusercontent.com/106486280/223224967-f1eee8d9-3945-4a13-9efc-208be8506256.png">
+
+<pre>
 export const registerFirebase = (email, password, firebaseConfig) => {
 
-    if (typeof window === "undefined") {
-      return;
-    }
-    
     return new Promise((message) => {
 
       // Initialize Firebase if the first time
@@ -114,26 +104,104 @@ export const registerFirebase = (email, password, firebaseConfig) => {
         });
     });
 };
+</pre>
 
+2. <b>Authenticating a User through Google Firebase using standard email and password</b>  - the following code takes in an email, password and your firebase configuration (see #1 above for an example of Firebase configuration), initializes the Firebase application and calls the auth.signInWithEmailAndPassword method to authenticate the user using standard email and password.  The JWT token is returned in the response along with user information including their role authentication.
+
+<pre>
+export const loginFirebase = (email, password, firebaseConfig) => {
+
+  return new Promise((message) => {
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    //login
+      const auth = firebase.auth();
+      const promise = auth.signInWithEmailAndPassword(
+        email.value,
+        password.value
+      );
+      promise.then((res) => {
+        const user = res.user
+        message(user);
+      })
+      promise.catch((error) => {
+        console.log(error)
+        message(error)
+      });
+  });
+};
+</pre>
+
+3. <b>Authenticating a User in Google Firebase using the Google Federated Identity service</b>  - the following code initializes the Firebase application and calls the <b>auth.GoogleAuthProvider</b> method to bring up the Google identity popup window showing the users available Google logins.   If the user is already logged into Google in the browser, the popup window automatically logs the user in using the Google email.  The JWT token is returned in the response along with user information including their role authentication.
+
+<pre>
+export const loginFirebaseGoogle = (firebaseConfig) => {
+  return new Promise((resolve, reject) => {
+     // Your web app's Firebase configuration
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        var credential = result.credential;
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        Cookie.set("token", token);
+        resolve(result);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        reject(error);
+        console.error(error);
+      });
+  })
+};
+</pre>
 ## Stripe Payment APIs
-The client side application requires the following frameworks and libraries.   It runs on top of React Next.js
- - <b>Create_Next_App</b> - this installs the React Next.jsframework along with react and react-dom and sets up a generic project.
- - <b>Apollo</b> - used for API calls
- - <b>graphql</b> - used for query sending and receiving (through Axios) to the Strapi database
- - <b>Bootstrap</b> - CSS styling library    
- - <b>Axios</b> - Allows http calls to the backend api server
- - <b>Google Firebase</b> Authentication cloud service
- - <b>Stripe</b> payment verification cloud server
-    
-The server side application requires the following frameworks and libraries.   It runs on top of Node.
- - <b>Node</b> - Javascript code runtime environment 
- - <b>Strapi plugins (and dependencies)</b> - Used to build the Strapi model and set up routes
- - <b>Strapi database</b> - an extremely light noSQL database
+
+### Setting up Stripe in your Application
+
+1. Include the stripe APIs as a script in your application.   For this NEXT.js application,  it is referenced in _app.js.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Script src="https://js.stripe.com/v3" />
+
+2. Import the following Stripe methods in your payment processing component
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+3. Call loadStripe() with your Stripe publishable API key to configure the Stripe library.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const promise = loadStripe("pk_test_51Ma3heKx9DdhcSyIQJj9VWDQHQ7uNLIx65sdyulywkzySfnbNxRbkwpp4Y1IJN7W4sDMNoQWkgukk35jnrpsrcbK00JnrDaRFh");
+
+4. Intialize the Stripe Elements.   Note that the Checkout Form that uses the Stripe credit card strip must be wrapped in the Elements provider.  This allows the child components to access the Stripe service via the Elements consumer.
+
+<pre>
+ <Elements stripe={promise}>
+        <CheckoutForm />
+      </Elements>
+</pre>
+
+5. In your checkout component,  reference the cardElement.  This will add the Stripe credit card strip on the form 
+
+<pre>
+cardElement = elements.getElement(CardElement);
+</pre>
  
-## Roadmap of Future Improvements
-•	Create an account page to allow users to change their information
-•	Have food by category and allow user to choose a category across all restaurants
-•	Include delivery options
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="373" alt="image" src="https://user-images.githubusercontent.com/106486280/223234620-06008b86-e493-4568-a338-804c22a00567.png">
+
+ 6. Once the user submits, call the CreateToken method using the cardElement for payment processing.  Stripe returns a token with an id that can be validated for success.
+ 
+ <pre>
+  const token = await stripe.createToken(cardElement);
+  const userToken = Cookies.get("token");
+ </pre>
+ 
 
 
 
