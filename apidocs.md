@@ -49,7 +49,7 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
  
 ### Dishes (PUT Update Method)
   - <b>http://164.92.99.205:1337/dishes/:id</b> - updates a specific dish in the database.  See the GET method for fields to include on your PUT.
-  - 
+
 ### Dishes (DELETE Method)
   - <b>http://164.92.99.205:1337/dishes/:id</b> - deletes a specific dish from the database based on the dish id.  
   
@@ -65,20 +65,9 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
  
 ### Orders (PUT Update Method)
   - <b>http://164.92.99.205:1337/orders/:id</b> - updates a specific order in the database.  See the GET method for fields to include on your PUT.
-  - 
+  
 ### Orders (DELETE Method)
   - <b>http://164.92.99.205:1337/orders/:id</b> - deletes a specific order from the database based on the order id.
-
-
-
-
-
- - <b>Apollo</b> - used for API calls
- - <b>graphql</b> - used for query sending and receiving (through Axios) to the Strapi database
- - <b>Bootstrap</b> - CSS styling library    
- - <b>Axios</b> - Allows http calls to the backend api server
- - <b>Google Firebase</b> Authentication cloud service
- - <b>Stripe</b> payment verification cloud server
 
 ## GraphQL APIs
 The application uses the GraphQL Apollo client library to access the backend Strapi database running on the DigitalOcean hosted site via a Node backend server.   The APIs include
@@ -94,6 +83,37 @@ The application uses the GraphQL Apollo client library to access the backend Str
 
 ## Google Firebase APIs
 1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and strapi database) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
+
+export const registerFirebase = (email, password, firebaseConfig) => {
+
+    if (typeof window === "undefined") {
+      return;
+    }
+    
+    return new Promise((message) => {
+
+      // Initialize Firebase if the first time
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+  
+      //signup
+      const auth = firebase.auth();
+      const promise = auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      promise.then((res) => {
+        const user = res.user
+        message(user);
+      })
+
+      promise.catch((error) => {
+        message(error);
+        });
+    });
+};
 
 ## Stripe Payment APIs
 The client side application requires the following frameworks and libraries.   It runs on top of React Next.js
