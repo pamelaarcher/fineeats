@@ -174,17 +174,22 @@ export const loginFirebaseGoogle = (firebaseConfig) => {
 
 2. Import the following Stripe methods in your payment processing component
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+<pre>
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+</pre>
 
-3. Call loadStripe() with your Stripe publishable API key to configure the Stripe library.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const promise = loadStripe("pk_test_51Ma3heKx9DdhcSyIQJj9VWDQHQ7uNLIx65sdyulywkzySfnbNxRbkwpp4Y1IJN7W4sDMNoQWkgukk35jnrpsrcbK00JnrDaRFh");
+3. Call loadStripe() with your Stripe publishable API key to configure the Stripe library.   
+
+<pre>
+const promise = loadStripe("pk_test_51Ma3heKx9DdhcSyIQJj9VWDQHQ7uNLIx65sdyulywkzySfnbNxRbkwpp4Y1IJN7W4sDMNoQWkgukk35jnrpsrcbK00JnrDaRFh");
+</pre>
 
 4. Intialize the Stripe Elements.   Note that the Checkout Form that uses the Stripe credit card strip must be wrapped in the Elements provider.  This allows the child components to access the Stripe service via the Elements consumer.
 
 <pre>
- <Elements stripe={promise}>
-        <CheckoutForm />
-      </Elements>
+&lt;Elements stripe={promise}&gt;
+&lt;CheckoutForm /&gt;
+&lt;Elements\&gt;
 </pre>
 
 5. In your checkout component,  reference the cardElement.  This will add the Stripe credit card strip on the form 
