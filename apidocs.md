@@ -14,7 +14,7 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
 ### USERS (POST Method)
  - <b>http://164.92.99.205:1337/auth/local`, {identifier, password}</b> - used to log in to Strapi.  The identifier is the same as the email.   This returns a jwt token along with other information on the user such as username and role.  For example,  this would look like the following in Postman   
  
- <img width="469" alt="image" src="https://user-images.githubusercontent.com/106486280/223210483-7ce187f3-1233-4746-a283-135b79a57e69.png">
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="469" alt="image" src="https://user-images.githubusercontent.com/106486280/223210483-7ce187f3-1233-4746-a283-135b79a57e69.png">
 
  
  - <b>http://164.92.99.205:1337/auth/local/register`, { username, email, password })
