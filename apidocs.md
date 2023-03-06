@@ -8,11 +8,45 @@
 - [Roadmap of Future Improvements](#roadmap-of-future-improvements)
 
 ## Overview
+The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi database, API calls to the Google Firebase authentication services and the Stripe vendor payment services.   This document describes these APIs.
+
+## Direct STRAPI Routes
+### USERS (POST Method)
+ - <b>http://164.92.99.205:1337/auth/local/register`, { username, email, password })
+### Restaurants (GET Method)
+ - <b>http://164.92.99.205:1337/restaurants</b> - brings back all restaurants and their associated dishes in JSON format
+ - <b>http://164.92.99.205:1337/restaurants/count</b> - brings back restaurant count
+ - <b>http://164.92.99.205:1337/restaurants/:id</b> - brings back information on a single restaurant and their associated dishes in JSON format
+ 
+### Restaurants (POST Create Method)
+ - <b>http://164.92.99.205:1337/restaurants</b> - posts a single restaurant to the database
+ 
+### Restaurants (PUT Update Method)
+  - <b>http://164.92.99.205:1337/restaurant/:id</b> - updates a specific restaurant from the database
+  - 
+### Restaurants (DELETE Method)
+  - <b>http://164.92.99.205:1337/restaurant/:id</b> - deletes a specific restaurant from the database
+
+
+
+ - <b>Apollo</b> - used for API calls
+ - <b>graphql</b> - used for query sending and receiving (through Axios) to the Strapi database
+ - <b>Bootstrap</b> - CSS styling library    
+ - <b>Axios</b> - Allows http calls to the backend api server
+ - <b>Google Firebase</b> Authentication cloud service
+ - <b>Stripe</b> payment verification cloud server
 
 ## GraphQL APIs
-This restaurant delivery application is built with React Next.js and provides the ability to create an account, login in, choose dishes from a variety of restaurants and build an order.  Once the order is complete,  there is a credit card process that goes against the Stripe cloud service to verify the credit card and let the restaurant know that the payment information is good.
+The application uses the GraphQL Apollo client library to access the backend Strapi database running on the DigitalOcean hosted site via a Node backend server.   The APIs include
 
-The application is three tiered with React/Next used for the client,  a Node server used for the backend APIs calls and a Strapi database that hosts the restaurant and dishes information.   In addition,  the cloud based Google Firebase authentication service is used to validate registrations and logins and the Stripe cloud based payment service is used for credit card validation.   The application is currently hosted on DigitalOcean.
+### Restaurants
+ - <b>http://164.92.99.205:1337/restaurants/count</b> - this installs the React Next.jsframework along with react and react-dom and sets up a generic project.
+ - <b>Apollo</b> - used for API calls
+ - <b>graphql</b> - used for query sending and receiving (through Axios) to the Strapi database
+ - <b>Bootstrap</b> - CSS styling library    
+ - <b>Axios</b> - Allows http calls to the backend api server
+ - <b>Google Firebase</b> Authentication cloud service
+ - <b>Stripe</b> payment verification cloud server
 
 ## Google Firebase APIs
 1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and strapi database) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
