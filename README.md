@@ -16,7 +16,7 @@ This restaurant delivery application is built with React Next.js and provides th
 The application is three tiered with React/Next used for the client,  a Node server used for the backend APIs calls and a Strapi database that hosts the restaurant and dishes information.   In addition,  the cloud based Google Firebase authentication service is used to validate registrations and logins and the Stripe cloud based payment service is used for credit card validation.   The application is currently hosted on DigitalOcean.
 
 ## Installation Guidelines 
-1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and express) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
+1. Clone this project to your local desktop.   There will be two subdirectories, <b>backend</b> (a back end server using node and strapi database) and <b>fineeats</b> (a client side react Next.js project built with create-next-app).  The <b>backend</b> server provides the APIs to the Strapi database and routing logic.   
 
 ### Setting up the fineeats create-next-app application
 1. Rename the new <b>fineeats</b> directory as we will be creating a new one with the same name with create-next-app.
@@ -69,6 +69,8 @@ This application is made up of 10 main functions
 •	Create an account page to allow users to change their information
 •	Have food by category and allow user to choose a category across all restaurants
 •	Include delivery options
+
+## Link to APIs
 
 ## Demo
 * [Fine Eats Demo](http://164.92.99.205/)
