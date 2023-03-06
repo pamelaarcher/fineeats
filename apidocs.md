@@ -2,10 +2,10 @@
 ## Table of content
 
 - [Overview](#overview)
-- [GraphQL APIs](#graphql-apis)
+- [Strapi APIs](#strapi-api-calls)
+- [GraphQL Queries](#graphQL-queries)
 - [Google Firebase APIs](#google-firebase-apis)
 - [Stripe Payment APIs](#stripe-payment-apis)
-- [Roadmap of Future Improvements](#roadmap-of-future-improvements)
 
 ## Overview
 The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi database, API calls to the Google Firebase authentication services and the Stripe vendor payment services.   This document describes these APIs.
@@ -69,8 +69,75 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
 ### Orders (DELETE Method)
   - <b>http://164.92.99.205:1337/orders/:id</b> - deletes a specific order from the database based on the order id.
 
-## GraphQL APIs
-The application uses the GraphQL Apollo client library to access the backend Strapi database running on the DigitalOcean hosted site via a Node backend server.   The APIs include
+## GraphQL Queries
+The application uses the GraphQL Apollo client library to access the backend Strapi database running on the DigitalOcean hosted site via a Node backend server.  A set of queries are used to access data.
+
+### Get Strapi Restaurant Data
+Retrieves all restaurants in the Strapi database.  
+
+<pre>
+  const GET_RESTAURANTS = gql`
+    query {
+      restaurants {
+        id
+        name
+        description
+        image {
+          url
+        }
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(GET_RESTAURANTS)
+</pre>
+
+### Get Strapi Dishes Data based on a Given Restaurant
+Retrieves all dishes for a given restaurant. 
+
+<pre>
+const GET_RESTAURANT_DISHES = gql`
+  query($id: ID!) {
+    restaurant(id: $id) {
+      id
+      name
+      dishes {
+        id
+        name
+        description
+        price
+        image {
+          url
+        }
+      }
+    }
+  }
+`;
+
+  // const router = useRouter();
+  const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, {
+    variables: { id: restId},
+  });
+</pre>
+
+### Retrieve Orders
+Retrieves all orders in the database.  These are then filtered for the user.  An enhancement will be to just pull for a user.  This route does not currently exist.   
+
+<pre>
+  const GET_ORDERS = gql`
+    query {
+      orders {
+        id
+        user
+        address
+        city
+        state
+        amount
+        dishes
+    }
+  }
+`;
+  const { loading, error, data } = useQuery(GET_ORDERS)
+</pre>
 
 ## Google Firebase APIs
 1. <b>Registering a User in Google Firebase</b>  - the following code takes in an email, password and your firebase configuration, initializes the Firebase application and calls the auth.createUserWithEmailAndPassword method to register the user in Google Firebase using standard email and password.  The JWT token is returned in the response along with user information including their role authentication.   A firebase configuration example is as follows.   
