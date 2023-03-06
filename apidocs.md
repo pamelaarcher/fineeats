@@ -12,7 +12,8 @@ The Fine Eats application uses a set of GraphQL APIs to query the backend Strapi
 
 ## Direct STRAPI Routes
 ### USERS (POST Method)
- - <b>http://164.92.99.205:1337/auth/local`, {identifier, password})
+ - <b>http://164.92.99.205:1337/auth/local`, {identifier, password})   
+ 
   Example of this via postman would look like the following:
   <img width="469" alt="image" src="https://user-images.githubusercontent.com/106486280/223210483-7ce187f3-1233-4746-a283-135b79a57e69.png">
 
