@@ -10,6 +10,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { logout } from "../auth";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import Link from "next/link";
+import { SocialIcon } from 'react-social-icons';
 
 import {
   StyledNavBar,
@@ -145,6 +146,8 @@ export function Navigation(){
             </Nav>
             {(context.windowWidth >= 768 && isAuthenticated) ? (
               <>
+              {/* <SocialIcon url="https://linkedin.com/in/pamela-archer-671b471" bgColor="#7ADFFF" style={{marginTop: "24px", marginLeft: "10px", marginRight: "12px", marginTop: "8px", height: 30, width: 30}}/> */}
+              <SocialIcon url="https://github.com/pamelaarcher/fineeats" bgColor="#ffb600" style={{marginLeft: "5px", marginRight: "5px", marginTop: "12px", height: 30, width: 30}} target="_blank"/>
               <CartButton suppressHydrationWarning={true} onClick={openCart}>
                 <CartCenter>
                   <img src='./images/cart.svg' fill="white"></img>
