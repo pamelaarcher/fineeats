@@ -5,7 +5,7 @@ export const StyledCheckout=styled.div`
  position: fixed;
  width: 500px;
  top: 60px;
- right: 20px;
+ right: 10px;
  
  /* inset: 60px auto auto auto; */
  visibility: visible;
@@ -19,6 +19,19 @@ export const StyledCheckout=styled.div`
  background: var(--bs-gray-400);
  transition: .25s ease-out;
  transition-property: opacity,transform,visibility;
+
+ &:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 2.9em;
+    z-index: -1;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: rgb(248, 247, 242);
+    box-shadow: rgb(61 90 113 / 40%) -4px -4px 4px;
+}
 
   h1 {
   color: var(--bs-primary);

@@ -1,6 +1,6 @@
 import {useContext} from "react"
 import { Nav, Navbar, NavItem, Offcanvas } from "react-bootstrap";
-import Cart from "../Cart/Cart"
+import {Cart} from "../Cart/Cart"
 import {GlobalContext} from "../../lib/GlobalContextProvider";
 import AppContext from "../context";
 import { useRouter } from 'next/router';
@@ -171,4 +171,3 @@ export function Navigation(){
     </>
   );
 }
-

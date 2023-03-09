@@ -21,7 +21,7 @@ import {
   StyledTotal
 } from "./Cart.styles"
 
-function Cart() {
+export function Cart() {
   let isAuthenticated = true;
   let {cart,addItem,removeItem , cartvisible, setCartVisible, ordervis, setOrderVis} = useContext(AppContext);
   const router = useRouter();
@@ -82,17 +82,26 @@ function Cart() {
         return (<div></div>)
     }
   }
+
 const checkoutItems = ()=>{
   return (
     <StyledTotal>
       <Badge>
-        <h4>Total: ${Math.round(cart.total * 100)/100}</h4>
+        <>
+        {cart.total<1 ? (
+          <>
+            <h4>Your cart is empty</h4>
+          </>
+        ) : (
+          <h4>Total: ${Math.round(cart.total * 100) / 100}</h4>
+        )}
+        </>
       </Badge>
-          {/* <Link href="/checkout/"> */}
-            <OrderButton onClick={closeCart}>
-              <a>Order</a>
-            </OrderButton>
-          {/* </Link> */}
+      {/* <Link href="/checkout/"> */}
+        <OrderButton disabled={cart.total<1 ? true : false} onClick={closeCart}>
+          <a>Order</a>
+        </OrderButton>
+      {/* </Link> */}
     </StyledTotal>
   )}
 
@@ -115,4 +124,3 @@ const checkoutItems = ()=>{
     </StyledCart>
   );
 }
-export default Cart;

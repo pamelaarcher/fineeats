@@ -5,7 +5,7 @@ export const StyledCart=styled.div`
  position: fixed;
  width: 400px;
  top: 60px;
- right: 20px;
+ right: 10px;
  
  /* inset: 60px auto auto auto; */
  visibility: visible;
@@ -19,6 +19,19 @@ export const StyledCart=styled.div`
  background: var(--bs-secondary);
  transition: .25s ease-out;
  transition-property: opacity,transform,visibility;
+
+ &:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 2.9em;
+    z-index: -1;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: rgb(248, 247, 242);
+    box-shadow: rgb(61 90 113 / 40%) -4px -4px 4px;
+}
 
 h1 {
   color: var(--bs-primary);
@@ -71,7 +84,7 @@ export const StyledItem=styled.div`
 export const OrderButton=styled(Button)`
   position: absolute;
   top: 5px;
-  right: 20px;
+  right: 0px;
   /* display: block; */
   background: linear-gradient(0deg, rgba(192,145,26,1) 0%, rgba(255,182,0,1) 100%);
   width: 80px;
